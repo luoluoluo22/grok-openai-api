@@ -85,6 +85,22 @@ main();</code></pre>
 
         <div class="card">
             <div class="card-body">
+                <h2 class="card-title">Netlify 部署说明</h2>
+                <p>如果您在 Netlify 上部署此服务，请确保以下设置：</p>
+                <ol>
+                    <li>在 Netlify 控制面板中，转到 <strong>Site settings</strong> &gt; <strong>Build & deploy</strong> &gt; <strong>Environment variables</strong></li>
+                    <li>添加环境变量 <code>GROK_COOKIE</code> 并设置为您的 Grok Cookie 值</li>
+                    <li>确保您的 <code>netlify.toml</code> 文件包含正确的重定向规则</li>
+                    <li>如果遇到 Python 依赖问题，可以尝试在 <code>requirements.txt</code> 中指定精确的版本号</li>
+                </ol>
+                <div class="alert alert-warning">
+                    <strong>注意：</strong> Netlify Functions 有 10 秒的执行时间限制，如果 Grok API 响应时间过长，可能会导致超时错误。
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
                 <h2 class="card-title">注意事项</h2>
                 <ul>
                     <li>此服务仅用于个人学习和研究目的</li>
@@ -97,7 +113,7 @@ main();</code></pre>
 
         <div class="footer">
             <p>Grok OpenAI API 服务 &copy; 2025</p>
-            <p><a href="https://github.com/yourusername/grok-openai-api" target="_blank">GitHub 项目</a></p>
+            <p><a href="https://github.com/luoluoluo22/grok-openai-api" target="_blank">GitHub 项目</a></p>
         </div>
     </div>
 

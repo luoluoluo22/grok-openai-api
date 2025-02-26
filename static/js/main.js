@@ -58,12 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
  * @param {HTMLElement} statusElement - 显示状态的HTML元素
  */
 function checkApiStatus(statusElement) {
-    fetch('/')
+    // 使用 Netlify 函数路径
+    fetch('/.netlify/functions/api')
         .then(response => {
             if (response.ok) {
                 return response.json();
             }
-            throw new Error('API服务不可用');
+            throw new Error(`API服务不可用 (${response.status})`);
         })
         .then(data => {
             statusElement.textContent = '在线';
@@ -79,6 +80,13 @@ function checkApiStatus(statusElement) {
             console.error('API状态检查失败:', error);
             statusElement.textContent = '离线';
             statusElement.className = 'badge bg-danger';
+            
+            // 显示详细错误信息
+            const versionElement = document.getElementById('api-version');
+            if (versionElement) {
+                versionElement.textContent = error.message;
+                versionElement.className = 'badge bg-danger';
+            }
         });
 }
 
@@ -100,12 +108,15 @@ function sendTestRequest() {
         testResultElement.className = 'alert alert-info mt-2';
     }
     
-    fetch('/v1/models')
+    // 使用 Netlify 函数路径
+    fetch('/.netlify/functions/api/v1/models')
         .then(response => {
             if (response.ok) {
                 return response.json();
             }
-            throw new Error(`API请求失败: ${response.status}`);
+            return response.text().then(text => {
+                throw new Error(`API请求失败: ${response.status}, 响应: ${text.substring(0, 100)}...`);
+            });
         })
         .then(data => {
             if (testResultElement) {

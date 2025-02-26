@@ -1,5 +1,5 @@
 [build]
-  command = "pip install -r requirements.txt"
+  command = "chmod +x netlify/build.sh && netlify/build.sh"
   publish = "static"
   functions = "netlify/functions"
 
@@ -13,6 +13,13 @@
   from = "/v1/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
+  force = true
+
+[[redirects]]
+  from = "/"
+  to = "/.netlify/functions/api"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/*"
