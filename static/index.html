@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grok OpenAI API 服务</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Grok OpenAI API 服务</h1>
+            <p class="lead">使用与 OpenAI 兼容的接口调用 Grok 模型</p>
+            <div class="api-status-container mt-3">
+                <span>API状态: </span>
+                <span id="api-status" class="badge bg-secondary">检查中...</span>
+                <span class="ms-2">版本: </span>
+                <span id="api-version" class="badge bg-info">未知</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">API 端点</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h5>获取模型列表</h5>
+                        <p><code>GET /v1/models</code></p>
+                    </li>
+                    <li class="list-group-item">
+                        <h5>聊天完成</h5>
+                        <p><code>POST /v1/chat/completions</code></p>
+                    </li>
+                </ul>
+                <div class="mt-3">
+                    <button id="test-button" class="btn btn-primary" onclick="sendTestRequest()">测试API</button>
+                    <div id="test-result" class="mt-2 alert alert-info" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">使用示例</h2>
+                <h5>Python</h5>
+                <pre><code>from openai import OpenAI
+
+client = OpenAI(
+    api_key="dummy",  # 可以使用任意值
+    base_url="https://your-netlify-site.netlify.app/v1"  # 指向您的服务
+)
+
+response = client.chat.completions.create(
+    model="grok-3",
+    messages=[
+        {"role": "user", "content": "你好，请介绍一下你自己"}
+    ]
+)
+
+print(response.choices[0].message.content)</code></pre>
+
+                <h5>JavaScript</h5>
+                <pre><code>import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: 'dummy', // 可以使用任意值
+  baseURL: 'https://your-netlify-site.netlify.app/v1', // 指向您的服务
+});
+
+async function main() {
+  const completion = await openai.chat.completions.create({
+    model: 'grok-3',
+    messages: [
+      { role: 'user', content: '你好，请介绍一下你自己' }
+    ],
+  });
+
+  console.log(completion.choices[0].message.content);
+}
+
+main();</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">注意事项</h2>
+                <ul>
+                    <li>此服务仅用于个人学习和研究目的</li>
+                    <li>请遵守 Grok 的使用条款和条件</li>
+                    <li>会话管理是简化的实现，实际应用中可能需要更复杂的会话管理机制</li>
+                    <li>在生产环境中使用前，请添加适当的安全措施和错误处理</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Grok OpenAI API 服务 &copy; 2025</p>
+            <p><a href="https://github.com/yourusername/grok-openai-api" target="_blank">GitHub 项目</a></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        // 显示测试结果区域
+        document.getElementById('test-button').addEventListener('click', function() {
+            document.getElementById('test-result').style.display = 'block';
+        });
+    </script>
+</body>
+</html> 

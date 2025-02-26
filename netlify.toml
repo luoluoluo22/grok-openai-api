@@ -1,0 +1,20 @@
+[build]
+  command = "pip install -r requirements.txt"
+  publish = "static"
+  functions = "netlify/functions"
+
+[dev]
+  command = "python src/app.py"
+  port = 5000
+  publish = "static"
+  autoLaunch = true
+
+[[redirects]]
+  from = "/v1/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 
