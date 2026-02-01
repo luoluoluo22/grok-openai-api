@@ -16,7 +16,7 @@
 
 1. 克隆仓库
    ```bash
-   git clone https://github.com/yourusername/grok-openai-api.git
+   git clone https://github.com/luoluoluo22/grok-openai-api.git
    cd grok-openai-api
    ```
 
